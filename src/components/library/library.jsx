@@ -1,12 +1,13 @@
 import React from 'react';
 import { useState } from 'react';
+import WordItem from '../word/word';
+import './library.css'
 
 function Library() {
   let arr = [];
   if(window.localStorage.getItem('words')) {
     if(JSON.parse(window.localStorage.getItem('words')).length){
       arr = JSON.parse(window.localStorage.getItem('words'));
-      console.log(arr);
     }
   }
    else {
@@ -17,7 +18,7 @@ function Library() {
     }];
   }
 
-  let [userWords, setUserWords] = useState(arr);  
+  let [userWords, setUserWords] = useState([...arr]);  
   
     class Word {
       constructor(word) {
@@ -27,7 +28,6 @@ function Library() {
           this.id = 2;//добавить useID
         }
         else this.id = userWords[userWords.length - 1].id+1;//добавить useID
-        console.log(this.id);
       }
       
       async init(callback) {
@@ -55,33 +55,37 @@ function Library() {
           });
           
           callback.bind(this)();
-          
       }
   }
 
   async function add()  {
     let wordValue = document.querySelector('#new-word-input');
-    if(wordValue) {
+    if(wordValue && wordValue.value) {
       let word = new Word(wordValue.value);
       await word.init(() => {});
       if(userWords[0].value == "There aren't any words"){
-        console.log('++');
         userWords = userWords.slice(1);
       }
       setUserWords([...userWords, word]);
-      console.log(userWords);
       window.localStorage.clear();
-      window.localStorage.setItem('words', JSON.stringify(userWords));
-      //console.log(JSON.parse(window.localStorage.getItem('words')))
+      window.localStorage.setItem(`words`, JSON.stringify([...userWords, word]));
     }
+    document.querySelector('#new-word-input').value = null;
   }
 
   return (
-    <div>
+    <div className='library'>
         <div className='add-new-word'>
           <input id="new-word-input" type="text" />
-          <button onClick={add}>Add</button>
-          {userWords.map(word => <div key={word.id}>{word.value} - {word.translation}</div>)}
+          <button onClick={add}>+</button>
+        </div>
+        <div className='word-list'>
+          <ul>
+            <li>Word</li>
+            <li>Translate</li>
+            <li>Learn level</li>
+          </ul>
+            {userWords.map((word) => <WordItem  key={word.id} word={word} />)}
         </div>
     </div>
   );
