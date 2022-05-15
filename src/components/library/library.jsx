@@ -3,12 +3,13 @@ import { useState } from 'react';
 
 function Library() {
   let arr = [];
-
-
-  if(window.localStorage.getItem('words')){
-    arr = JSON.parse(window.localStorage.getItem('words'));
-    console.log(arr);
-  } else {
+  if(window.localStorage.getItem('words')) {
+    if(JSON.parse(window.localStorage.getItem('words')).length){
+      arr = JSON.parse(window.localStorage.getItem('words'));
+      console.log(arr);
+    }
+  }
+   else {
     arr = [{
       value:"There aren't any words",
       id:1,
@@ -16,9 +17,7 @@ function Library() {
     }];
   }
 
-  let [userWords, setUserWords] = useState(arr);
-
-  
+  let [userWords, setUserWords] = useState(arr);  
   
     class Word {
       constructor(word) {
@@ -71,6 +70,7 @@ function Library() {
       }
       setUserWords([...userWords, word]);
       console.log(userWords);
+      window.localStorage.clear();
       window.localStorage.setItem('words', JSON.stringify(userWords));
       //console.log(JSON.parse(window.localStorage.getItem('words')))
     }
