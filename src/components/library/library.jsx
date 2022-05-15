@@ -24,7 +24,7 @@ function Library() {
       constructor(word) {
         this.value = word;
         this.learnLevel = 0;
-        if(userWords.length) {
+        if(!userWords.length) {
           this.id = 2;//добавить useID
         }
         else this.id = userWords[userWords.length - 1].id+1;//добавить useID
