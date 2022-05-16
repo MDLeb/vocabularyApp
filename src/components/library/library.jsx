@@ -6,17 +6,18 @@ import './library.css'
 function Library() {
   let arr = [];
   if(window.localStorage.getItem('words')) {
-    if(JSON.parse(window.localStorage.getItem('words')).length){
-      arr = JSON.parse(window.localStorage.getItem('words'));
+    switch(JSON.parse(window.localStorage.getItem('words'))) {
+      case null: {
+        arr = [{
+          value:"There aren't any words",
+          id:1,
+          translation:''
+        }];
+      } break;
+      default: arr = JSON.parse(window.localStorage.getItem('words'));
     }
   }
-   else {
-    arr = [{
-      value:"There aren't any words",
-      id:1,
-      translation:''
-    }];
-  }
+  
 
   let [userWords, setUserWords] = useState([...arr]);  
   

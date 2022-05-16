@@ -1,0 +1,26 @@
+.test-modal {
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 70%;
+    padding: 20px 0;
+}
+.test-modal-word {
+    text-align: center;
+    text-transform: capitalize;
+}
+.test-modal-btns {
+    display: flex;
+    justify-content: space-around;
+}
+.test-modal-btn {
+    padding: 20px;
+    text-transform: capitalize;
+    font-size: 20px;
+    border: 1px solid yellowgreen;
+    border-radius: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    
+}

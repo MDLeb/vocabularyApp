@@ -1,0 +1,8 @@
+.train-block {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    height: 300px;
+    text-align: center;
+    margin: 0 auto;
+}
