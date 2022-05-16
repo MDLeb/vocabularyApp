@@ -1,36 +1,18 @@
-.test-modal {
+.learn-modal {
     font-size: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     height: 70%;
     padding: 20px 0;
-    position: relative;
 }
-.test-modal-number{
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    box-shadow: 0 5px 10px 1px #666;
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.test-modal-word {
+.learn-modal-word,
+.learn-modal-word {
     text-align: center;
     text-transform: capitalize;
 }
-.test-modal-btns {
-    display: flex;
-    justify-content: space-around;
-}
-.test-modal-btn {
+.learn-modal-btn {
     padding: 20px;
-    flex: 1;
-    margin: 10px;
     text-transform: capitalize;
     font-size: 20px;
     border: 1px solid yellowgreen;
@@ -39,9 +21,9 @@
     cursor: pointer;
     box-shadow: 0 5px 10px 1px #666;
 }
-.test-modal-btn:hover {
+.learn-modal-btn:hover {
     box-shadow: 0 5px 6px 1px #666;
 }
-.test-modal-btn:active {
+.learn-modal-btn:active {
     box-shadow: 0 3px 2px 1px #666;
 }
