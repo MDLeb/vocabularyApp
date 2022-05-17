@@ -60,6 +60,8 @@ const TestComp = ({testArr}) => {
               if(a) {
                 wordsArray.find(elem => elem.value == currentWord.value).learnLevel < 90 ?
                   wordsArray.find(elem => elem.value == currentWord.value).learnLevel += 10 : wordsArray.find(elem => elem.value == currentWord.value).learnLevel = 100; 
+                  window.localStorage.clear();//разобраться с контекстом и менять в локал сторэдж только при выходе
+                  window.localStorage.setItem(`words`, JSON.stringify(wordsArray));
               }
            }
             } key={index}>{elem}</button>)}

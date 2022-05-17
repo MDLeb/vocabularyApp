@@ -21,7 +21,7 @@ function Train() {
       {([wordsArray, setWordsArray]) => (
         <div className='train-block'>
             <h2>Training</h2>
-            <input hidden value={wordsArray.length < 10 ? n = wordsArray.length : n = 10}/>
+            <input hidden readOnly value={wordsArray.length < 10 ? n = wordsArray.length : n = 10}/>
             <TestComp testArr={randArr(n, wordsArray)}></TestComp>
         </div>
       )}
