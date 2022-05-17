@@ -1,37 +1,16 @@
 import React from 'react';
-import { useState } from 'react';
 import WordItem from '../word/word';
-import './library.css'
+import './library.css';
+import { WordsContext } from '../../App';
 
-function Library() {
-  let arr = [];
-  if(window.localStorage.getItem('words')) {
-    switch(JSON.parse(window.localStorage.getItem('words'))) {
-      case null: {
-        arr = [{
-          value:"There aren't any words",
-          id:1,
-          translation:''
-        }];
-      } break;
-      default: arr = JSON.parse(window.localStorage.getItem('words'));
+function Library() {  
+  class Word {
+    constructor(word) {
+      this.value = word;
+      this.learnLevel = 0;
+      this.id = Date.now();
     }
-  }
-  
-
-  let [userWords, setUserWords] = useState([...arr]);  
-  
-    class Word {
-      constructor(word) {
-        this.value = word;
-        this.learnLevel = 0;
-        if(!userWords.length) {
-          this.id = 2;//добавить useID
-        }
-        else this.id = userWords[userWords.length - 1].id+1;//добавить useID
-      }
-      
-      async init(callback) {
+    async init(callback) {//запрос перевода слова
         const encodedParams = new URLSearchParams();
         encodedParams.append("fast", "false");
         encodedParams.append("from", "en");
@@ -47,48 +26,52 @@ function Library() {
           },
           body: encodedParams
         };
-
-       
+        
         await fetch('https://translo.p.rapidapi.com/api/v3/translate/', options)
           .then(response => response.json())
           .then(response => {
             this.translation = response.translated_text;
           });
-          
-          callback.bind(this)();
-      }
+      
+        callback.bind(this)();
+    }
   }
 
   async function add()  {
     let wordValue = document.querySelector('#new-word-input');
-    if(wordValue && wordValue.value) {
-      let word = new Word(wordValue.value);
-      await word.init(() => {});
-      if(userWords[0].value == "There aren't any words"){
-        userWords = userWords.slice(1);
-      }
-      setUserWords([...userWords, word]);
-      window.localStorage.clear();
-      window.localStorage.setItem(`words`, JSON.stringify([...userWords, word]));
-    }
+    if(!wordValue && !wordValue.value) return;
+    let word = new Word(wordValue.value);
+    await word.init(() => {});
     document.querySelector('#new-word-input').value = null;
+    return word;
   }
 
   return (
-    <div className='library'>
-        <div className='add-new-word'>
-          <input id="new-word-input" type="text" />
-          <button onClick={add}>+</button>
-        </div>
-        <div className='word-list'>
-          <ul>
-            <li>Word</li>
-            <li>Translate</li>
-            <li>Learn level</li>
-          </ul>
-            {userWords.map((word) => <WordItem  key={word.id} word={word} />)}
-        </div>
-    </div>
+    <WordsContext.Consumer>
+    {([wordsArray, setWordsArray]) => (
+        <div className='library'>
+          <div className='add-new-word'>
+            <input id="new-word-input" type="text" />
+            <button onClick={async ()=> {
+               let word = await add();
+              (setWordsArray([...wordsArray, word]))
+            }}>+</button>
+          </div>
+          <div className='word-list'>
+            <ul>
+              <li>Word</li>
+              <li>Translate</li>
+              <li>Learn level</li>
+              <li></li>
+            </ul>
+            {(!wordsArray.length) ? <ul><li>There aren't any words. Add some :)</li></ul> : wordsArray.map((word) => <WordItem  key={word.id} word={word} />)}
+          </div>
+      </div>
+    )}
+  </WordsContext.Consumer>
+
+
+    
   );
 }
 

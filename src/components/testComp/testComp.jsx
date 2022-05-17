@@ -1,63 +1,72 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { useState } from 'react';
-import WordItem from '../word/word';
 import './testComp.css'
+import { WordsContext } from '../../App';
 
 const TestComp = ({testArr}) => {
   
-  let var1 = '';
-  let var2 = '';
-
-  let randWord = (max) => {
-    let word;
-    let index = Math.floor(Math.random()*max);
-    word = testArr[index].translation;
-    if(word == currentWord.value || (var1 != '' && var2 == var1)){
-      randWord(max);
-      return;
+  //здесь можно поменять количество вариантов ответа (кроме верного) - length
+  let randWord = (startArr = [], length = 3) => {//передать стартовый массив, количество элементов на выходе
+    let words = startArr;
+    let index = Math.floor(Math.random() * testArr.length);
+    let word = testArr[index].translation;
+    if(words.includes(word) || word == testArr[n].translation) randWord(words, length);
+    else words.push(word);
+    if (words.length < length) {
+      randWord(words, length);
     }
-    else return word;
+    return words;
   } 
 
-  let [n, setN] = useState(0);
-  let currentWord = {
-    value:testArr[n].value,
-    translation:testArr[n].translation,
-    vars:[var1, var2, testArr[n].translation],
+  let shuffle = (array) => {
+    return array.sort(() => Math.random() - 0.5);
   }
 
-  var1 = randWord(testArr.length);
-  var2 = randWord(testArr.length);
+  let [n, setN] = useState(0);
 
-  currentWord.vars[0] = var1;
-  currentWord.vars[1] = var2;
-
+  let [currentWord, setCurrentWord] = useState({
+    value:testArr[n].value,
+    translation:testArr[n].translation,
+    vars:[...randWord(), testArr[n].translation],
+  });
 
   const nextWord = () => {
     if(n == testArr.length-1) return;
     setN(n = n+1);
-    currentWord = testArr[n].value;
+    setCurrentWord({
+      value:testArr[n].value,
+      translation:testArr[n].translation,
+      vars:[...randWord(), testArr[n].translation],
+    });
   }
   
   const checkWord = (e) => {
-    console.log(currentWord.translation, e.target.innerText)
     if(currentWord.translation.toLowerCase() === e.target.innerText.toLowerCase()){
-      console.log('Верно');
       nextWord();
-    }
-    else {
-      console.log('Неверно') 
-    }    
+      return true;
+    }  
+    else return false;
   }
 
   return (
+    <WordsContext.Consumer>
+      {([wordsArray, setWordsArray]) => (
     <div className='test-modal'>
         <span className='test-modal-number'>{n+1}/{testArr.length}</span>
         <p className='test-modal-word'>{currentWord.value}</p>
         <div className='test-modal-btns'>
-           {currentWord.vars.map((elem, index) => <button className='test-modal-btn' onClick={checkWord} key={index}>{elem}</button>)}
+           {shuffle(currentWord.vars).map((elem, index) => <button className='test-modal-btn' onClick={(event) => {
+              let a = checkWord(event);
+              if(a) {
+                wordsArray.find(elem => elem.value == currentWord.value).learnLevel < 90 ?
+                  wordsArray.find(elem => elem.value == currentWord.value).learnLevel += 10 : wordsArray.find(elem => elem.value == currentWord.value).learnLevel = 100; 
+              }
+           }
+            } key={index}>{elem}</button>)}
         </div>
     </div>
+    )}
+    </WordsContext.Consumer>
   );
 }
 

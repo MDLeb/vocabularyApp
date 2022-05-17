@@ -1,31 +1,31 @@
-import React, { useState, useEffect, useRef } from 'react';
-import ReactDOM from 'react-dom/client';
-import WordItem from '../word/word';
+import React from 'react';
 import TestComp from '../testComp/testComp'
 import './train.css'
+import { WordsContext } from '../../App';
+
 
 function Train() {
   
-  let rand = (max) => {
-    let randIndexArr = [];
-    while(randIndexArr.length < 5) {//почемуто будет в два раза больше
-      let n = Math.floor(Math.random() * max);
-      if(randIndexArr.includes(n)) continue;
-      randIndexArr.push(n);
-    }
-    return randIndexArr;
+  let shuffle = (array) => {
+    return array.sort(() => Math.random() - 0.5);
   }
-  
-  let testArr = [];
-  let arr = JSON.parse(window.localStorage.getItem('words')).filter(elem => { if(elem.learnLevel < 90) return elem});
-  let indexArr = rand(arr.length);
-  indexArr.forEach(elem => testArr.push(arr[elem]));
+
+  let n;
+
+  let randArr = (length, array) => {
+     return shuffle(array.filter(elem => elem.learnLevel < 100)).slice(0, length);
+  }
 
   return (
-    <div className='train-block'>
-        <h2>Training</h2>
-        <TestComp testArr={testArr}></TestComp>
-    </div>
+    <WordsContext.Consumer>
+      {([wordsArray, setWordsArray]) => (
+        <div className='train-block'>
+            <h2>Training</h2>
+            <input hidden value={wordsArray.length < 10 ? n = wordsArray.length : n = 10}/>
+            <TestComp testArr={randArr(n, wordsArray)}></TestComp>
+        </div>
+      )}
+    </WordsContext.Consumer>
   );
 }
 

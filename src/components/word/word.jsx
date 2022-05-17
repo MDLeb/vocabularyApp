@@ -1,15 +1,22 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { useState } from 'react';
+import { WordsContext } from '../../App';
 
-const WordItem = (props) => {
+const WordItem = ({word}) => {
   
   return (
-    <ul className='word-item'>
-      <li>{props.word.value}</li>
-      <li>{props.word.translation}</li>
-      <li>{props.word.learnLevel}%</li> 
-    </ul>
+      <WordsContext.Consumer>
+      {([wordsArray, setWordsArray]) => (
+          <ul className='word-item'>
+          <li>{word.value}</li>
+          <li>{word.translation}</li>
+          <li>{word.learnLevel}%</li> 
+          <li><button onClick={()=> {
+                (setWordsArray(wordsArray.filter(elem => elem.id !== word.id)));
+              }
+          }>Remove</button></li>
+        </ul>
+      )}
+    </WordsContext.Consumer>
   );
 }
 
