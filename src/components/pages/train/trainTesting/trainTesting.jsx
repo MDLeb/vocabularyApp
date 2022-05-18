@@ -1,16 +1,16 @@
 import React from 'react';
 import TestComp from '../testComp/testComp'
-import './train.css'
-import { WordsContext } from '../../App';
+import './trainTesting.css'
+import { WordsContext } from '../../../../App';
 
 
-function Train() {
-  
+function TrainTesting() {
+
   let shuffle = (array) => {
     return array.sort(() => Math.random() - 0.5);
   }
 
-  let n;
+  let n;//меняется в returne в зависимости от количества слов в библиотеке
 
   let randArr = (length, array) => {
      return shuffle(array.filter(elem => elem.learnLevel < 100)).slice(0, length);
@@ -18,9 +18,9 @@ function Train() {
 
   return (
     <WordsContext.Consumer>
-      {([wordsArray, setWordsArray]) => (
+      {([[wordsArray, setWordsArray], [score, setScore]]) => (
         <div className='train-block'>
-            <h2>Training</h2>
+            <h2>TEST</h2>
             <input hidden readOnly value={wordsArray.length < 10 ? n = wordsArray.length : n = 10}/>
             <TestComp testArr={randArr(n, wordsArray)}></TestComp>
         </div>
@@ -29,4 +29,4 @@ function Train() {
   );
 }
 
-export default Train;
+export default TrainTesting;

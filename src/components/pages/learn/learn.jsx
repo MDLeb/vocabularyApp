@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import LearnComp from '../learnComp/learnComp'
+import LearnComp from './learnComp/learnComp'
 import './learn.css'
 
 function Learn() {

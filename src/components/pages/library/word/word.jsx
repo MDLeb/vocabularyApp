@@ -1,5 +1,5 @@
 import React from 'react';
-import { WordsContext } from '../../App';
+import { WordsContext } from '../../../../App';
 
 const WordItem = ({word}) => {
   

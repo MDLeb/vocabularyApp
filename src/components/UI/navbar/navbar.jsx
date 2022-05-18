@@ -15,7 +15,7 @@ const Navbar = () => {
     return (
         <div className="navbar">
             <ul className="navbar__links">
-                <li className='active'>
+                <li>
                     <Link onClick={activeTab} to="/library">Library</Link>
                 </li>
                 <li>

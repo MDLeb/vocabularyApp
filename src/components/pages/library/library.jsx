@@ -1,7 +1,8 @@
-import React from 'react';
-import WordItem from '../word/word';
+import React, {useState} from 'react';
+import WordItem from './word/word';
 import './library.css';
-import { WordsContext } from '../../App';
+import { WordsContext } from '../../../App';
+import Spinner from '../../UI/spinner/spinner';
 
 function Library() {  
   class Word {
@@ -27,12 +28,15 @@ function Library() {
           body: encodedParams
         };
         
+        setIsLoading(true);
+
         await fetch('https://translo.p.rapidapi.com/api/v3/translate/', options)
           .then(response => response.json())
           .then(response => {
             this.translation = response.translated_text;
           });
-      
+        
+        setIsLoading(false);
         callback.bind(this)();
     }
   }
@@ -41,19 +45,31 @@ function Library() {
     let wordValue = document.querySelector('#new-word-input');
     if(!wordValue && !wordValue.value) return;
     let word = new Word(wordValue.value);
+    let spinner = document.createElement('Spinner');
+    document.querySelector('.library').append(spinner);
     await word.init(() => {});
     document.querySelector('#new-word-input').value = null;
     return word;
   }
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [isInputEmpty, setIsInputEmpty] = useState(true);
+
+  const checkInput = () => {
+    document.querySelector('#new-word-input').value ? setIsInputEmpty(false) : setIsInputEmpty(true);
+  }
+
   return (
     <WordsContext.Consumer>
-    {([wordsArray, setWordsArray]) => (
+    {([[wordsArray, setWordsArray], [score, setScore]]) => (
         <div className='library'>
+          <div>Score: {score}</div>
+          {isLoading ? <Spinner /> : ''}
           <div className='add-new-word'>
-            <input id="new-word-input" type="text" />
-            <button onClick={async ()=> {
+            <input id="new-word-input" type="text" onChange={checkInput}/>
+            <button disabled={isInputEmpty ? true : false} onClick={async ()=> {
                let word = await add();
+               console.log(wordsArray);
               (setWordsArray([...wordsArray, word]))
             }}>+</button>
           </div>
