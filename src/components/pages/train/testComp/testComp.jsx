@@ -6,8 +6,6 @@ import {Link} from "react-router-dom";
 
 const TestComp = ({testArr}) => {
   
-  console.log(testArr);
-
   //здесь можно поменять количество вариантов ответа (кроме верного) - length
   let randWord = (startArr = [], length = 3) => {//передать стартовый массив, количество элементов на выходе
     let words = startArr;
@@ -59,11 +57,9 @@ const TestComp = ({testArr}) => {
   return (
     <WordsContext.Consumer>
       {([[wordsArray, setWordsArray], [score, setScore]]) => (
-          
-          (n + 1) == testArr.length ?
+          n+1 == testArr.length ? //почему возвращает тру на единицу раньше чем надо
           <div className='test-modal last'>
               {score > 5 ? <p className='test-modal-score'>Well done. Your score is {currentScore} points!</p> : <p className='test-modal-score'>Your score is {currentScore}.</p>}
-              
               <Link to="/train">
                 <button className='test-modal-exit' onClick={() => {setScore(+score+currentScore)}}>+</button>
               </Link>
@@ -88,7 +84,6 @@ const TestComp = ({testArr}) => {
                   } key={index}>{elem}</button>)}
               </div>
           </div>
-        
       )}
     </WordsContext.Consumer>
   );

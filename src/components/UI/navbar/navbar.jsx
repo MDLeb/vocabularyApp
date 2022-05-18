@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import './navbar.css';
 
-const Navbar = () => {
+const Navbar = ({level}) => {
 
     let activeTab = (event) => {
         Array.from(document.querySelectorAll('.navbar__links li'))
@@ -14,6 +14,7 @@ const Navbar = () => {
 
     return (
         <div className="navbar">
+            <div className='navbar__level'>Level: {level}</div>
             <ul className="navbar__links">
                 <li>
                     <Link onClick={activeTab} to="/library">Library</Link>

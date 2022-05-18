@@ -14,11 +14,6 @@
     text-decoration: none; 
     overflow-y: visible;
 }
-.navbar__links li {
-    
- }
-.navbar__links li.active {
-}
 .navbar__links li a {
     color: white;
     padding: 20px 10px;
@@ -37,4 +32,23 @@
     background-color: aliceblue;
     box-shadow: 0px 5px 5px 2px #333;
 
+}
+.navbar__level {
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #67d8b4;
+    font-size: 28px;
+    position: relative;
+    margin: 30px 0;
+}
+.navbar__level:hover::after {
+    content: 'Level increases every 50 points & 10 words with 100% LL';
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+    font-size: 14px;
+    color: #20B887;
+    background-color: white;
 }

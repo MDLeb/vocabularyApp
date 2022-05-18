@@ -5,8 +5,6 @@ import {Link} from "react-router-dom";
 
 const WritingComp = ({testArr}) => {
   
-  console.log(testArr);
-
   let [n, setN] = useState(0);
   const [currentScore, setCurrentScore] = useState(0);
 

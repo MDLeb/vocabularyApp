@@ -25,6 +25,8 @@ function TrainTesting({train}) {
             <input hidden readOnly value={wordsArray.length < 10 ? n = wordsArray.length : n = 10}/>
             {wordsArray.length >= 5 ? 
               train.name == 'test' ? 
+              randArr(n, wordsArray).length < 5 ?
+              <div>There are not enough new words in your vocabulary for test. It needs more than 5 words with learn level less than 100%. </div> :
               <TestComp testArr={randArr(n, wordsArray)}></TestComp> : 
               <WritingComp testArr={randArr(n, wordsArray)}></WritingComp> : 
               <div>There are not enough words in your vocabulary for test. Add more than 5 words. </div>}
