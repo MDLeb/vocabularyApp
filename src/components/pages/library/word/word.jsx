@@ -5,7 +5,7 @@ const WordItem = ({word}) => {
   
   return (
       <WordsContext.Consumer>
-      {([wordsArray, setWordsArray]) => (
+      {([[wordsArray, setWordsArray], []]) => (
           <ul className='word-item'>
           <li>{word.value}</li>
           <li>{word.translation}</li>

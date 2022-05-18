@@ -24,14 +24,14 @@ function Train({module}) {
 
   return (
     <WordsContext.Consumer>
-      {([]) => (
+      {([[wordsArray, setWordsArray], [score, setScore]]) => (
         <div className='train-block'>
             <h2>Trainings</h2>
             {
               module !='' ? 
               module == 'test' ?
-              <TrainTesting /> : 
-              <div>writing</div> :
+              <TrainTesting train={trains[0]}/> : 
+              <TrainTesting train={trains[1]}/> : 
               <div className='train-block-start'>
                 {
                   trains.map(elem => 

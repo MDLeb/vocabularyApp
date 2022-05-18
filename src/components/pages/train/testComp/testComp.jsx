@@ -51,7 +51,7 @@ const TestComp = ({testArr}) => {
       return true;
     }  
     else {
-      currentScore > 0 ? setCurrentScore(currentScore-1) : setCurrentScore(currentScore);
+      currentScore > 0 ? setCurrentScore(currentScore-1) : setCurrentScore(0);
       return false;
     }
   }
@@ -59,7 +59,7 @@ const TestComp = ({testArr}) => {
   return (
     <WordsContext.Consumer>
       {([[wordsArray, setWordsArray], [score, setScore]]) => (
-        
+          
           (n + 1) == testArr.length ?
           <div className='test-modal last'>
               {score > 5 ? <p className='test-modal-score'>Well done. Your score is {currentScore} points!</p> : <p className='test-modal-score'>Your score is {currentScore}.</p>}
@@ -79,9 +79,9 @@ const TestComp = ({testArr}) => {
                 {shuffle(currentWord.vars).map((elem, index) => <button className='test-modal-btn' onClick={(event) => {
                     let a = checkWord(event);
                     if(a) {
-                      wordsArray.find(elem => elem.value == currentWord.value).learnLevel < 90 ?
+                        wordsArray.find(elem => elem.value == currentWord.value).learnLevel < 90 ?
                         wordsArray.find(elem => elem.value == currentWord.value).learnLevel += 10 : wordsArray.find(elem => elem.value == currentWord.value).learnLevel = 100; 
-                        window.localStorage.setItem(`words`, '');;//разобраться с контекстом и менять в локал сторэдж только при выходе
+                        window.localStorage.setItem(`words`, '');//разобраться с контекстом и менять в локал сторэдж только при выходе
                         window.localStorage.setItem(`words`, JSON.stringify(wordsArray));
                     }
                 }

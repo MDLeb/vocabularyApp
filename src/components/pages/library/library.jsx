@@ -33,7 +33,7 @@ function Library() {
         await fetch('https://translo.p.rapidapi.com/api/v3/translate/', options)
           .then(response => response.json())
           .then(response => {
-            this.translation = response.translated_text;
+            response.translated_text.includes(';') ? this.translation = response.translated_text.split(';')[0] : this.translation = response.translated_text;
           });
         
         setIsLoading(false);
