@@ -59,6 +59,20 @@ function Library() {
     document.querySelector('#new-word-input').value ? setIsInputEmpty(false) : setIsInputEmpty(true);
   }
 
+  function sortByField(array, field) {
+    let arr = array.sort((a, b) => {
+      if (field == 'learnLevel') 
+        return (a[field] > b[field] ? 1 : -1);
+     else 
+        return (a[field].toLowerCase() > b[field].toLowerCase() ? 1 : -1);
+    });
+    return arr;
+  }
+  
+  let [sortBy, setSortBy] = useState('value')
+  //value, translation, learnLevel
+
+  
   return (
     <WordsContext.Consumer>
     {([[wordsArray, setWordsArray], [score, setScore]]) => (
@@ -75,12 +89,14 @@ function Library() {
           </div>
           <div className='word-list'>
             <ul>
-              <li>Word</li>
-              <li>Translate</li>
-              <li>Learn level</li>
+              <li>Word<button onClick={() => {setSortBy('value')}}>></button></li>
+              <li>Translate<button onClick={() => {setSortBy('translation')}}>></button></li>
+              <li>Learn level<button onClick={() => {setSortBy('learnLevel')}}>></button></li>
               <li></li>
             </ul>
-            {(!wordsArray.length) ? <ul><li>There aren't any words. Add some :)</li></ul> : wordsArray.map((word) => <WordItem  key={word.id} word={word} />)}
+            {(!wordsArray.length) ? 
+              <ul><li>There aren't any words. Add some :)</li></ul> : 
+              sortByField(wordsArray, sortBy).map((word) => <WordItem  key={word.id} word={word} />)}
           </div>
       </div>
     )}

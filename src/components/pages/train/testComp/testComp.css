@@ -10,7 +10,8 @@
     border-radius: 20px;
     box-shadow: 0 0 15px 1px #999;
 }
-.test-modal-number{
+
+.test-modal-number {
     position: absolute;
     top: 10px;
     left: 20px;
