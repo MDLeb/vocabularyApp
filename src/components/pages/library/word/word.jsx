@@ -10,10 +10,10 @@ const WordItem = ({word}) => {
           <li>{word.value}</li>
           <li>{word.translation}</li>
           <li>{word.learnLevel}%</li> 
-          <li><button onClick={()=> {
+          <li><button className='word-remove-btn' onClick={()=> {
                 (setWordsArray(wordsArray.filter(elem => elem.id !== word.id)));
               }
-          }>Remove</button></li>
+          }>&#128465;</button></li>
         </ul>
       )}
     </WordsContext.Consumer>

@@ -43,7 +43,7 @@
     margin: 30px 0;
 }
 .navbar__level:hover::after {
-    content: 'Level increases every 50 points & 10 words with 100% LL';
+    content: 'Level increases each 50 points & 5 words with 100% LL';
     position: absolute;
     left: 0;
     top: 0;

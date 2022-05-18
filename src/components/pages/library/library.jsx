@@ -34,9 +34,9 @@ function Library() {
           .then(response => response.json())
           .then(response => {
             response.translated_text.includes(';') ? this.translation = response.translated_text.split(';')[0] : this.translation = response.translated_text;
-          });
-        
-        setIsLoading(false);
+          })
+          .finally(() => {setIsLoading(false)});
+      
         callback.bind(this)();
     }
   }
@@ -59,18 +59,28 @@ function Library() {
     document.querySelector('#new-word-input').value ? setIsInputEmpty(false) : setIsInputEmpty(true);
   }
 
-  function sortByField(array, field) {
-    let arr = array.sort((a, b) => {
-      if (field == 'learnLevel') 
-        return (a[field] > b[field] ? 1 : -1);
-     else 
-        return (a[field].toLowerCase() > b[field].toLowerCase() ? 1 : -1);
-    });
+  function sortByField(array, params = {}) {
+    let arr = [];
+    if (!params.filter) {
+      arr = array.sort((a, b) => {
+      if (params.field == 'learnLevel') 
+        return (a[params.field] > b[params.field] ? 1 : -1);
+      else 
+        return (a[params.field].toLowerCase() > b[params.field].toLowerCase() ? 1 : -1);
+      });
+    } else {
+        arr = array.filter(elem => elem.value.includes(params.value));
+    }
     return arr;
   }
   
-  let [sortBy, setSortBy] = useState('value')
+  let [sortBy, setSortBy] = useState({
+    field: 'value',
+    filter: false,
+    value: '',
+  })
   //value, translation, learnLevel
+  //+filter = 'word' entered
 
   
   return (
@@ -80,18 +90,28 @@ function Library() {
           <div>Score: {score}</div>
           {isLoading ? <Spinner /> : ''}
           <div className='add-new-word'>
-            <input id="new-word-input" type="text" onChange={checkInput}/>
+            <input id="new-word-input" type="text" onChange={checkInput} placeholder='Write your word here...' onKeyUp={
+               async (e)=> {
+                if (e.code == 'Enter' || e.code == 'NumpadEnter' && e.target.value) {
+                    let word = await add();
+                    (setWordsArray([...wordsArray, word]));
+                    setSortBy({field:'value', filter: false, value: '',});
+                } else if (!e.target.value) {
+                    setSortBy({field:'value', filter: false, value: ''});
+                } else {
+                    setSortBy({field:'value', filter: true, value: `${e.target.value}`})
+                }
+            }} />
             <button disabled={isInputEmpty ? true : false} onClick={async ()=> {
                let word = await add();
-               console.log(wordsArray);
               (setWordsArray([...wordsArray, word]))
             }}>+</button>
           </div>
           <div className='word-list'>
             <ul>
-              <li>Word<button onClick={() => {setSortBy('value')}}>></button></li>
-              <li>Translate<button onClick={() => {setSortBy('translation')}}>></button></li>
-              <li>Learn level<button onClick={() => {setSortBy('learnLevel')}}>></button></li>
+              <li>Word<button className='word-list-sort-btn' onClick={() => {setSortBy({field:'value', filter: false, value: '',})}}>&#9660;</button></li>
+              <li>Translate<button className='word-list-sort-btn' onClick={() => {setSortBy({field:'translation', filter: false, value: '',})}}>&#9660;</button></li>
+              <li>Learn level<button className='word-list-sort-btn' onClick={() => {setSortBy({field:'learnLevel', filter: false, value: '',})}}>&#9660;</button></li>
               <li></li>
             </ul>
             {(!wordsArray.length) ? 
