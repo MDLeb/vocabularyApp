@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { WordsContext } from '../../../../App';
 import {Link} from "react-router-dom";
+import '../testComp/testComp.css';
+import './writingComp.css'
 
 const WritingComp = ({testArr}) => {
   
@@ -55,7 +57,7 @@ const WritingComp = ({testArr}) => {
               <span className='test-modal-number'>{n+1}/{testArr.length}</span>
               <p className='test-modal-word'>{currentWord.translation}</p>
               <div>
-                <input autoFocus={true} type="text" onKeyDown={(e)=>{if(e.code == 'Enter' || e.code == 'NumpadEnter') checkWord(e)}}/>
+                <input className='test-modal-input' autoFocus={true} type="text" onKeyDown={(e)=>{if(e.code == 'Enter' || e.code == 'NumpadEnter') checkWord(e)}}/>
               </div>
           </div>
         
