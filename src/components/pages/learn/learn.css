@@ -1,8 +1,97 @@
 .learn-block {
     width: 100%;
-    max-width: 500px;
-    padding: 20px;
-    height: 300px;
+    max-width: 768px;
+    padding: 10px;
     text-align: center;
     margin: 0 auto;
+}
+.learn-modal {
+    min-height: 200px;
+    max-height: 460px;
+    height: 100%;
+    background-color: #F2F6FE;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 20px 0;
+    position: relative;
+    margin-top: 40px;
+}
+.word-learn-level {
+    position: absolute;
+    width: 100px;
+    color: white;
+    top: -5px;
+    left: -5px;
+    padding: 10px;
+    background-color: rgba(243, 24, 0, 0.5);
+}
+.learn-modal-word {
+    text-align: center;
+    text-transform: capitalize;
+    font-weight: 700;
+    font-size: 72px;
+}
+.learn-modal-translation {
+   align-self: flex-start;
+   margin-left: 100px;
+   text-transform: capitalize;
+}
+.learn-modal-translation-value {
+    color: #0C9267;
+    font-size: 48px;
+    text-transform: capitalize;
+}
+.learn-modal-btn {
+    height: 50px;
+    width: 150px;
+    background-color: #0C9267;
+    text-transform: uppercase;
+    font-size: 20px;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    display: flex;
+    font-size: 16px;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+    bottom: -80px;
+}
+.learn-modal-btn.arrow {
+    font-size: 40px;
+}
+.learn-modal-btn:hover {
+    box-shadow: 0 5px 6px 1px #666;
+}
+.learn-modal-btn:active {
+    box-shadow: 0 3px 2px 1px #666;
+}
+
+@media (max-width: 768px) {
+    .learn-modal-word,
+    .learn-modal-translation-value {
+        font-size: 40px;
+    }
+}
+@media (max-width: 425px) {
+    .learn-modal-translation {
+        margin: 0 auto;
+    }
+    .learn-modal-word,
+    .learn-modal-translation-value {
+        font-size: 30px;
+    }
+    .learn-modal-word{
+        padding-top: 10px
+    }   
+    .learn-modal-btn {
+        width: 100%;
+        bottom: -60px;
+
+    }
+    
 }

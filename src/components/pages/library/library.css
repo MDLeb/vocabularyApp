@@ -1,11 +1,12 @@
 .library {
     width: 100%;
-    max-width: 500px;
-    margin: 0 auto;
+    margin: 40px auto 0 auto;
+    padding: 10px;
+    margin-right: 9%;
 }
 .add-new-word {
     width: 100%;
-    padding: 15px;
+    padding: 15px 0;
     display: flex;
     align-items: center;
 }
@@ -16,62 +17,194 @@
     outline: none;
     width: 100%;
     font-size: 18px;
+    border-bottom: 1px solid #0C9267;
+    transition: all 0.5s ease;
 }
 .add-new-word button {
-    background-color: transparent;
+    background-color: #1bbf8b;
+    color: white;
     border: none;
     outline: none;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 40px;
     line-height: 43px;
-    color: yellowgreen;
     width: 40px;
     height: 40px;
     border-radius: 40px;
     box-shadow: 0 0 5px 1px #ccc;
     cursor: pointer;
+    transition: all 0.5s ease;
 }
+
 .add-new-word button:disabled {
     cursor: auto;
-    color: #ccc;
+    background-color: #ccc;
+    opacity: 0.5;
 }
 .add-new-word input:focus,
 .add-new-word button:focus {
     color: rgb(25, 133, 59);
-    outline: 1px dotted grey;
+    outline: none;
+    border-radius: 10px;
+    box-shadow: inset 0 0 5px 1px #ccc;
+
 }
 .word-list {
-    background-color: #F2F6FE;
     width: 100%;
+    color: #0C9267;
 }
 .word-list ul {
     width: 100%;
     display: flex;
     flex-direction: row;
     list-style: none;
+    position: relative;
 }
 .word-list ul li {
-    text-transform: capitalize;
+    position: relative;
     text-align: center;
+    background-color: #F2F6FE;
+    z-index: 2;
     flex: 1;
-    padding: 20px 0;
 }
-.word-list-sort-btn,
-.word-remove-btn {
+.word-list-header {
+    color: #992E00;
+    font-weight: bold;
+}
+.word-list-header li {
+    border: none;
+    padding: 10px 0;
+}
+.word-list-header li:after {
+    content: '';
+    display: block;
+    margin: -10px auto 0 auto;
+    width: 80%;
+    height: 15px;
+    background-color: #992E00;
+    opacity: 0.1;
+}
+.word-list-header li:last-child {
+    display: none;
+}
+.word-list-sort-btn {
     width: 20px;
     height: 20px;
+    color: #992E00;
     background-color: transparent;
     border: none;
     border-radius: 50%;
     cursor: pointer;
 }
-.word-list-sort-btn:hover,
-.word-remove-btn:hover {
+.word-list-sort-btn:hover {
     color: #ccc;
 }
-.word-remove-btn {
-    margin-top: -7px;
-    vertical-align: top;
+.word-item:hover li {
+    background-color: #F3F3F3;
+}
+.word-item li:not(:last-child):not(:nth-child(3)) {
+    border-right: 1px solid #ccc;
+}
+.word-item li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    word-break: break-all;
+    padding: 15px;
+    border-color: #ccc;
+}
+.word-item li span::first-letter {
+    text-transform: uppercase;
+}
+.word-item li:nth-child(2) {
+    padding: 15px 40px 15px 10px;
+    max-width: 35%;
+    word-break: break-all;
+    word-wrap: normal;
+}
+.word-item li.word-remove {
+    width: 100px;
+    height: 100%;
+    position: absolute;
+    cursor: pointer;
+    right: 0;
+    background-color: #F3F3F3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #992E00;
+    z-index: 1;
+    transition: right 1s ease;
+}
+.word-list ul li.word-remove span.icon {
     font-size: 25px;
-    text-align: 20px;
+}
+.word-list ul:hover li.word-remove,
+.word-list ul:hover li.word-remove:hover {
+    right: -100px;
+}
+.save-changes-btn {
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    color: #992E00;
+}
+.save-changes-btn:focus {
+    outline: 1px dotted #ccc;
+}
+.word-item li input {
+    width: 80%;
+    background-color: transparent;
+    padding: 5px;
+    border: none;
+    border-bottom: 1px solid #0C9267;
+}
+.word-item li input:focus {
+    outline: 1px dotted #ccc;
+}
+
+@media (max-width: 768px) {
+    .library {
+        margin: 0;
+        margin-top: 10px;
+    }
+    .word-item li.word-remove {
+        z-index: 2;
+        width: 10%;
+        display: flex;
+        justify-content: center;
+        transition: opacity 0.5s ease;
+        color: transparent;
+        background-color: transparent;
+        padding: 0 20px 0 0;
+    }
+    .word-item:hover li.word-remove {
+        z-index: 4;
+        right: 0px !important;
+    }
+    .word-item li.word-remove>.icon {
+        color: #992E00;
+    }
+}
+@media (max-width: 426px) {
+    .library {
+        margin: 0;
+        margin-top: 10px;
+    }
+
+    .add-new-word input,
+    .word-list-header,
+    .word-item li  {
+        font-size: 14px;
+    }
+}
+@media (max-width: 325px) {
+    .add-new-word input,
+    .word-list-header,
+    .word-item li  {
+        font-size: 12px;
+    }
+
 }

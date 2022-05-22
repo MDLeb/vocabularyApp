@@ -16,4 +16,5 @@
     border-top: none;
     border-bottom: none;
     animation: spin 1.5s infinite linear;
+    z-index: 999;
 }

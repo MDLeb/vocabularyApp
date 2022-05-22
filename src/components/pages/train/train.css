@@ -1,31 +1,198 @@
-.train-block,
+.train-block {
+    width: 100%;
+}
 .train-block-start {
     width: 100%;
-    max-width: 500px;
-    padding: 20px;
-    text-align: center;
+    margin: 0 10px;
+    max-width: 768px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
+    padding-top: 100px;
+    gap: 50px;
 }
 .train-item {
-    padding: 10px;
-    background-position: bottom 25px left 60%;
-    background-repeat: no-repeat;
-    background-size: 40% auto;
-    width: 80%;
-    min-height: 200px;
-    border-radius: 20px;
-    box-shadow: 0 0 10px 5px #ccc;
-}
-.train-item:hover {
-    box-shadow: 0 0 5px 3px #777;
-}
-.train-item h2 {
-    text-transform: capitalize;
-    text-decoration: underline;
-    text-decoration-color: white;
+    width: 100%;
+    max-width: 500px;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #D7E4FF;
+    text-decoration: none;
     color: black;
+}
+.train-item>div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.train-item p {
+    color: rgb(26, 26, 209);
+}
+.train-item p::first-letter,
+.train-item h2::first-letter {
+    text-transform: capitalize;
+}
+.train-block-test {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: #F9FBFF;
+}
+.test-modal-exit {
+    border: none;
+    font-size: 36px;
+    background-color: #036344;
+    color: white;
+    text-transform: uppercase;
+    padding: 20px;
+    max-width: 240px;
+    max-height: 70px;
+    width: 10%;
+    min-width: 100px;
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    cursor: pointer;
+}
+.test-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+    justify-content: center;
+    gap: 10%;
+}
+.test-modal-word {
+    padding: 30px 0;
+    text-align: center;
+    font-weight: 700;
+    font-size: 72px;
+    color: #036344;
+}
+.test-modal-word::first-letter {
+    text-transform: uppercase;
+}
+.test-modal-btns {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 15px;
+}
+.test-modal-btn {
+   max-width: 300px;
+   height: 80px;
+   width: 25%;
+   font-size: 36px;
+   text-transform: capitalize;
+   color: #516961;
+   border: none;
+   background-color: #FFFFFF;
+   box-shadow: 0 10px 10px 2px #ccc;
+   cursor: pointer;
+}
+.test-modal-btn:hover {
+    box-shadow: 0 5px 5px 2px #ccc;    
+}
+.test-modal-score {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+}
+.test-modal-description {
+    font-size: 24px;
+    margin-top: -50px;
+}
+.test-modal-number {
+    font-size: 30px;
+    position: absolute;
+    top: 30px;
+    left: 50%;
+}
+.test-modal-final-score {
+    font-size: 60px;
+    text-align: center;
+}
+.test-modal-input,
+.test-modal-send {
+    padding: 10px;
+    font-size: 20px;
+}
+.test-modal-send {
+    border: 2px solid #036344;
+    background-color: #036344;
+    color: #FFFFFF;
+    text-transform: uppercase;
+}
+@media (max-width: 768px) {
+    
+    .train-block-start {
+        padding: 20px 10px;
+        gap: 10px;
+    }
+    .test-modal-exit {
+        font-size: 18px;
+    }
+    .test-modal-word {
+        text-align: center;
+        font-weight: 700;
+        font-size: 40px;
+    }
+    .test-modal-btn {
+        width: 150px;
+        height: 40px;
+        font-size: 24px;
+     }    
+     .test-modal-btn {
+        font-size: 18px;
+    }
+    
+}
+@media (max-width: 426px) {
+    .test-modal {
+        justify-content: flex-start;
+    }
+    .test-modal-btns {
+        flex-direction: column;
+        justify-content: center;        
+    }
+    .test-modal-btn {
+        max-width: none;
+        width: 100%;
+    }
+    .test-modal-number {
+        font-size: 18px;
+    }
+    .test-modal-word.meaning {
+        font-size: 18px;
+    }
+    .test-modal-description {
+        text-align: center;
+        font-size: 14px;
+    }
+    .test-modal-final-score {
+        margin-top: 40%;
+        font-size: 28px;
+    }
+    .test-modal-input,
+    .test-modal-send {
+        width: 100%;
+    }
+    .train-item>div {
+        gap: 20px;
+        width: 100%;
+    }
+    .train-item h2 {
+        text-align: center;
+    }
+    .train-item img {
+        display: none;
+    }
+    
 }

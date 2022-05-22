@@ -10,16 +10,12 @@ const WordsContext = createContext();
 
 function App() {
 
-  
   const [wordsArray, setWordsArray] = useState(JSON.parse(window.localStorage.getItem('words')) ? JSON.parse(window.localStorage.getItem('words')) : []);
   const [score, setScore] = useState(window.localStorage.getItem('score') ? window.localStorage.getItem('score') : 0);
 
-  const [level, setLevel] = useState(
-    (score >= 50 && wordsArray.filter(elem => elem.learnLevel == 100).length >= 5) ? 1 : 0
-  );
+  const [level, setLevel] = useState((score >= 50) ? 1 : 0);
 
-  if(level > 0 && score >= (level+1)*50 && wordsArray.filter(elem => elem.learnLevel == 100).length >= (level+1)*5)
-    setLevel(level+1);
+  if(level > 0 && score >= (level+1)*50) setLevel(level+1);
   // useEffect(() => {
   //   return () => {
   //       window.localStorage.clear();
@@ -31,9 +27,9 @@ function App() {
       window.localStorage.clear();//разобраться с контекстом и менять в локал сторэдж только при выходе
       window.localStorage.setItem(`words`, JSON.stringify(wordsArray));
       window.localStorage.setItem(`score`, score);
-      if(level == 0 && score >= 50 && wordsArray.filter(elem => elem.learnLevel == 100).length >= 5)
+      if(level == 0 && score >= 50)
         setLevel(1);
-      if(level > 0 && score >= level*50 && wordsArray.filter(elem => elem.learnLevel == 100).length >= (level+1)*5)
+      if(level > 0 && score >= level*50)
         setLevel(level+1);
     }, [wordsArray, score]);
     
@@ -44,11 +40,12 @@ function App() {
                 <Fragment>
                     <Navbar level={level}/> 
                     <Routes>
-                        <Route exact path='/' element={<Library/>} />
-                        <Route exact path='/library' element={<Library/>} />
+                        <Route exact path='/' element={<Library />} />
+                        <Route exact path='/library' element={<Library />} />
                         <Route exact path='/train' element={<Train module={''}/>} />
-                        <Route exact path='/train/writing' element={<Train module={'writing'}/>} />
-                        <Route exact path='/train/test' element={<Train module={'test'}/>} />
+                        <Route exact path='/train/check' element={<Train module={'check'}/>} />
+                        <Route exact path='/train/write' element={<Train module={'write'}/>} />
+                        <Route exact path='/train/check-meaning' element={<Train module={'check-meaning'}/>} />
                         <Route exact path='/learn' element={<Learn/>}/>
                     </Routes>
                 </Fragment>

@@ -3,14 +3,15 @@ import { useState } from 'react';
 import { WordsContext } from '../../../../App';
 import {Link} from "react-router-dom";
 
-const TestComp = ({testArr}) => {
+const CheckMeaningComp = ({testArr}) => {
   
   //здесь можно поменять количество вариантов ответа (кроме верного) - length
   let randWord = (startArr = [], length = 3) => {//передать стартовый массив, количество элементов на выходе
+    if (testArr.length == 0) return;
     let words = startArr;
     let index = Math.floor(Math.random() * testArr.length);
-    let word = testArr[index].translation;
-    if(words.includes(word) || word == testArr[n]?.translation) randWord(words, length);
+    let word = testArr[index].value;
+    if(words.includes(word) || word == testArr[n]?.value) randWord(words, length);
     else words.push(word);
     if (words.length < length) {
       randWord(words, length);
@@ -27,8 +28,8 @@ const TestComp = ({testArr}) => {
 
   let [currentWord, setCurrentWord] = useState({
     value:testArr[n]?.value,
-    translation:testArr[n]?.translation,
-    vars:[...randWord(), testArr[n]?.translation],
+    meaning:testArr[n]?.meaning,
+    vars:[...randWord(), testArr[n]?.value],
   });
 
   const nextWord = () => {
@@ -36,13 +37,13 @@ const TestComp = ({testArr}) => {
     if(n > testArr.length-1) return;
     setCurrentWord({
       value:testArr[n]?.value,
-      translation:testArr[n]?.translation,
-      vars:[...randWord(), testArr[n]?.translation],
+      meaning:testArr[n]?.meaning,
+      vars:[...randWord(), testArr[n]?.value],
     });
   }
   
   const checkWord = (e) => {
-    if(currentWord.translation.toLowerCase() === e.target.innerText.toLowerCase()){
+    if(currentWord.value.toLowerCase() === e.target.innerText.toLowerCase()){
       nextWord();
       setCurrentScore(currentScore+1);
       return true;
@@ -69,8 +70,8 @@ const TestComp = ({testArr}) => {
                 <button className='test-modal-exit' onClick={() => {setScore(+score+currentScore)}}>exit</button>
               </Link>
               <span className='test-modal-number'>{n+1}/{testArr.length}</span>
-              <p className='test-modal-word'>{currentWord.value}</p>
-              <span className='test-modal-description'>Set translation fo this word</span>
+              <p className='test-modal-word meaning'>{currentWord.meaning}</p>
+              <span className='test-modal-description'>Chose word by its meaning</span>
               <div className='test-modal-btns'>
                 {shuffle(currentWord.vars).map((elem, index) => <button className='test-modal-btn' onClick={(event) => {
                     let a = checkWord(event);
@@ -89,4 +90,4 @@ const TestComp = ({testArr}) => {
   );
 }
 
-export default TestComp;
+export default CheckMeaningComp;

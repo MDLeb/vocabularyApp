@@ -1,11 +1,42 @@
 .navbar {
-    width: 25%;
+    width: 300px;
     min-height: 100%;
-    margin-right: 40px;
     padding-top: 15%;
-    background: url('../../../../public/source/nav_bg_img.png') top 20px left 20px/40% auto no-repeat;
+    margin-right: 40px;
+    background: url('../../../../public/source/nav_bg_img.png') top 20px left 20px/25% auto no-repeat;
     background-color: #20B887;
-
+    position: relative;
+}
+.navbar__burger_btn {
+    display: none;
+    align-items: center;
+    height: 50px;
+    width: 50px;
+    padding: 10px 0;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.navbar__burger_btn i{
+    display: block;
+    border-radius: 2px;
+    width: 30px;
+    height: 3px;
+    background-color: #abddcd;
+}
+.navbar__burger_btn.active i{
+    background-color: white;
+}
+.navbar__burger_btn.active {
+    justify-content: center;
+}
+.navbar__burger_btn.active i:nth-child(1) {
+    transform: translateY(1.5px) rotate(45deg);
+}
+.navbar__burger_btn.active i:nth-child(2) {
+    display: none;
+}
+.navbar__burger_btn.active i:nth-child(3) {
+    transform: translateY(-1.5px) rotate(-45deg);
 }
 .navbar__links {
     height: 100%;
@@ -30,25 +61,132 @@
     width: 120%;
     border-radius: 0 5px 5px 0;
     background-color: aliceblue;
-    box-shadow: 0px 5px 5px 2px #333;
+    box-shadow: 0px 5px 5px 2px #666;
 
 }
 .navbar__level {
     text-align: center;
     font-weight: bold;
     text-transform: uppercase;
-    color: #67d8b4;
+    color: #abddcd;
     font-size: 28px;
-    position: relative;
-    margin: 30px 0;
-}
-.navbar__level:hover::after {
-    content: 'Level increases each 50 points & 5 words with 100% LL';
     position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.navbar__level::after {
+    content: 'Level increases each 50 points';
+    position: absolute;
+    padding: 20px;
+    max-width: 100%;
     left: 0;
     top: 0;
+    z-index: 2;
+    margin-top: -100px;
+    transition: margin-top 1s ease;
+    transform: translateY(-25%);
     display: block;
     font-size: 14px;
     color: #20B887;
     background-color: white;
+}
+.navbar__level:hover::after {
+    margin-top: 0;
+    transition: margin-top 1s ease;
+}
+.navbar__score {
+    position: absolute;
+    color: #20B887;
+    top: 20px;
+    right: -100px;
+}
+@media (max-width: 1024px) {
+    .navbar {
+        background-position: top 80px center;
+    }
+    .navbar__level {
+        width: 100%;
+        text-align: center;
+        top: 20px;
+        left: 0;
+        margin-top: -3px;
+    }
+}
+@media (max-width: 768px) {
+    .navbar {
+        width: 100%;
+        height: 150px;     
+        background-size: 10% auto;
+        background-position: left 10px top 10px;
+        margin: 0;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+    }
+    .navbar__level {
+        width: 200px;
+        left: 15%;
+    }
+    .navbar__links {
+        display: flex;
+        align-self: flex-end;
+        justify-self: center;
+        margin-bottom: -11px;
+        width: 100%;
+        height: 60px;
+    }
+    .navbar__links li {
+        flex: 1;
+    }
+    .navbar__links li a {
+        text-align: center;
+        padding: 15px;
+    }
+    .navbar__links li.active a {
+        width: 100%;
+        border-radius: 5px 5px 0 0;
+        background-color: aliceblue;
+        box-shadow: none;
+    
+    }
+    .navbar__score {
+        height: 20px;
+        padding: 20px;
+        top: 15px;
+        color: white;
+        right: 0;
+    }
+}
+@media (max-width: 550px) {
+     .navbar__score {
+        height: 20px;
+        padding: 0px 10px;
+        color: white;
+    }
+    .navbar__level {
+        font-size: 18px;
+    }
+    .navbar__level::after {
+        padding: 15px;
+    }
+    .navbar__level:hover::after {
+        margin-top: -3px;
+        transition: margin-top 1s ease;
+    }
+}
+@media (max-width: 375px) {
+    .navbar__level {
+        width: 100px;
+    }
+    .navbar__level::after {
+        padding: 10px;
+        width: 100px;
+        
+        font-size: 12px;
+    }
+    .navbar__level:hover::after {
+        margin-top: -8px;
+        transition: margin-top 1s ease;
+    }
 }

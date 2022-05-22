@@ -10,14 +10,22 @@ function Train({module}) {
   
   let trains = [
     {
-      name:'test',
-      bg:'../../../source/testing_bg_img.png',
+      name:'check',
+      img:'../../../source/check-mode.svg',
       availiable: true,
+      level: 'easy',
     },
     {
-      name: 'writing',
-      bg:'../../../source/writing_bg_img.png',
+      name: 'write',
+      img:'../../../source/write-mode.svg',
       availiable: false,
+      level: 'hard',
+    },
+    {
+      name: 'check-meaning',
+      img:'../../../source/check-mode.svg',//заменить
+      availiable: false,
+      level: 'hard',
     }
   ]
 
@@ -26,20 +34,58 @@ function Train({module}) {
     <WordsContext.Consumer>
       {([[wordsArray, setWordsArray], [score, setScore]]) => (
         <div className='train-block'>
-            <h2>Trainings</h2>
             {
-              module !='' ? 
-              module == 'test' ?
-              <TrainTesting train={trains[0]}/> : 
-              <TrainTesting train={trains[1]}/> : 
-              <div className='train-block-start'>
-                {
-                  trains.map(elem => 
-                      <Link to={`/train/${elem.name}`} key={trains.indexOf(elem)} className='train-item' style={{backgroundImage: `url(${elem.bg})`}}>
-                          <h2>{elem.name}</h2>
-                      </Link>)
-                }</div> 
+              // module !='' ? 
+              // module == 'check' ?
+              // module == 'check-module' ?
+              // <TrainTesting train={trains[2]}/> : 
+              // <TrainTesting train={trains[0]}/> : 
+              // <TrainTesting train={trains[1]}/> : 
+              // <div className='train-block-start'>
+              //   {
+              //     trains.map(elem => 
+              //         <Link to={`/train/${elem.name}`} key={trains.indexOf(elem)} className='train-item'>
+              //             <div>
+              //               <h2>{elem.name} words<br/>Mode</h2>
+              //               <p>{elem.level} mode</p>
+              //             </div>
+              //             <img src={elem.img} alt="#"  />
+              //         </Link>)
+              //   }
+              // </div> 
+
+             (() => {switch (module) {
+                case '': 
+                  return <div className='train-block-start'>
+                       {
+                        trains.map(elem => 
+                            <Link to={`/train/${elem.name}`} key={trains.indexOf(elem)} className='train-item'>
+                                <div>
+                                  <h2>{elem.name} words<br/>Mode</h2>
+                                  <p>{elem.level} mode</p>
+                                </div>
+                                <img src={elem.img} alt="#"  />
+                            </Link>)
+                      }
+                    </div> 
                 
+                case 'check': {
+                  return <TrainTesting train={trains[0]}/>
+                }
+
+                case 'check-meaning': {
+                  console.log('+');
+                  return <TrainTesting train={trains[2]}/>
+                }
+
+                case 'write': {
+                  return <TrainTesting train={trains[1]}/>
+                }
+
+                default:
+                    return null
+                    
+              }})()                
             }
         </div>
       )}

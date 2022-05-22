@@ -2,18 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import LearnComp from './learnComp/learnComp'
 import './learn.css'
+import { WordsContext } from '../../../App';
+
 
 function Learn() {
-  
-  let arr = JSON.parse(window.localStorage.getItem('words')).filter(elem => { if(elem.learnLevel < 90) return elem});
-  console.log(arr);
 
   return (
-    <div className='learn-block'>
-        <h2>Learn</h2>
-        <LearnComp arr={arr}></LearnComp>
-    </div>
-  );
+      <WordsContext.Consumer>
+      {([[wordsArray, setWordsArray], [score, setScore]]) => (
+        <div className='learn-block'>
+            {wordsArray.filter(elem => elem.learnLevel < 100).length > 0 ? 
+              <LearnComp arr={wordsArray.filter(elem => elem.learnLevel < 100)}></LearnComp> : 
+              <div>There is not any words with learn level less than 100%. Add some new words. </div>}
+        </div>
+      )}
+    </WordsContext.Consumer>
+  )
 }
 
 export default Learn;
