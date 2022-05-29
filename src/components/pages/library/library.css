@@ -41,13 +41,14 @@
     background-color: #ccc;
     opacity: 0.5;
 }
-.add-new-word input:focus,
-.add-new-word button:focus {
+.add-new-word input:focus{
     color: rgb(25, 133, 59);
     outline: none;
     border-radius: 10px;
     box-shadow: inset 0 0 5px 1px #ccc;
-
+}
+.add-new-word button:focus {
+    background-color: #0C9267;
 }
 .word-list {
     width: 100%;
@@ -150,6 +151,14 @@
     right: 10px;
     cursor: pointer;
     color: #992E00;
+    display: block;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    background: url('../../../../public/source/pencil_ico.png') center/90% auto no-repeat;
+}
+.save-changes-btn.active {
+    background-image: url('../../../../public/source/save_ico.png');
 }
 .save-changes-btn:focus {
     outline: 1px dotted #ccc;

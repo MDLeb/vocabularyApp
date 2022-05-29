@@ -53,8 +53,10 @@ function Library() {
             DATA[`${firstLetter}`][this.value.toUpperCase()].MEANINGS[`${n}`][1])  
           this.meaning = DATA[`${firstLetter}`][this.value.toUpperCase()].MEANINGS[`${n}`][1];
 
-        while(this.meaning.includes(`${this.value}`) && DATA[`${firstLetter}`][this.value.toUpperCase()].MEANINGS[`${n+1}`])  
+        while(this.meaning.includes(`${this.value}`) && DATA[`${firstLetter}`][this.value.toUpperCase()].MEANINGS[`${n+1}`]) {
           this.meaning = DATA[`${firstLetter}`][this.value.toUpperCase()].MEANINGS[`${n+1}`][1];
+          n++;
+        }
 
         if(this.meaning.includes(';'))
           this.meaning = this.meaning.split(';')[0];
@@ -82,17 +84,19 @@ function Library() {
 
         await fetch('https://translo.p.rapidapi.com/api/v3/translate/', options)
           .then(response => response.json())
-          .catch((e) => {
-            
-          })//417????????????
           .then(response => {
             if (!response.translated_text) {
               alert('We didn`t find translation for this word');//??
               this.translation = 'Hasn`t been translated';
               return;
             }
-            response.translated_text.includes(';') ? this.translation = response.translated_text.split(';')[0] : this.translation = response.translated_text;
+            response.translated_text.includes(';') ?
+            this.translation = response.translated_text.split(';')[0] :
+            this.translation = response.translated_text;
           })
+          .catch((e) => {
+            console.error(e);
+          })//417????????????
           .finally(() => {setIsLoading(false)});
       
         callback.bind(this)();
@@ -169,8 +173,10 @@ function Library() {
               setIsInputEmpty(true);
             }}/>
             <button className='add-word-btn' disabled={isInputEmpty ? true : false} onClick={async ()=> {
-               let word = await add();
-              (setWordsArray([...wordsArray, word]))
+              let word = await add();
+              setIsInputEmpty(true);
+              (setWordsArray([...wordsArray, word]));
+              setSortBy({field:'value', filter: false, value: '',});
             }}>+</button>
           </div>
           <div className='word-list'>
@@ -181,7 +187,7 @@ function Library() {
               <li></li>
             </ul>
             {(!wordsArray.length) ? 
-              <ul><li>There aren't any words. Add some :)</li></ul> : 
+              <ul><li>There aren't any words. Add some.</li></ul> : 
               sortByField(wordsArray, sortBy).map((word) => <WordItem  key={word.id} id={word.id} />)}
           </div>
       </div>

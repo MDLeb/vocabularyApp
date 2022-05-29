@@ -11,9 +11,9 @@ function Learn() {
       <WordsContext.Consumer>
       {([[wordsArray, setWordsArray], [score, setScore]]) => (
         <div className='learn-block'>
-            {wordsArray.filter(elem => elem.learnLevel < 100).length > 0 ? 
+            {wordsArray?.filter(elem => elem.learnLevel < 100).length > 0 ? 
               <LearnComp arr={wordsArray.filter(elem => elem.learnLevel < 100)}></LearnComp> : 
-              <div>There is not any words with learn level less than 100%. Add some new words. </div>}
+              <div className='alert'>There are not any words with learn level less than 100%. Add some new words. </div>}
         </div>
       )}
     </WordsContext.Consumer>

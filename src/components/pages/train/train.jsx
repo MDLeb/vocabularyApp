@@ -3,7 +3,8 @@ import TrainTesting from './trainTesting/trainTesting'
 import './train.css'
 import { WordsContext } from '../../../App';
 import {Link} from "react-router-dom";
-
+import img1 from './img/check-mode-bg.png';
+import img2 from './img/write-mode-bg.png';
 
 
 function Train({module}) {
@@ -11,19 +12,19 @@ function Train({module}) {
   let trains = [
     {
       name:'check',
-      img:'./img/check-mode-bg.png',
+      img: img1,
       availiable: true,
       level: 'easy',
     },
     {
       name: 'write',
-      img:'./img/write-mode-bg.png',
+      img: img2,
       availiable: false,
       level: 'hard',
     },
     {
       name: 'check-meaning',
-      img:'../../../source/check-mode.svg',//заменить
+      img: img2,
       availiable: false,
       level: 'hard',
     }
@@ -34,7 +35,9 @@ function Train({module}) {
     <WordsContext.Consumer>
       {([[wordsArray, setWordsArray], [score, setScore]]) => (
         <div className='train-block'>
-            {
+            { 
+              wordsArray.length < 5 ?
+                <div className='alert'>Add some words ({5-wordsArray.length}) :)</div>: 
                 (() => {switch (module) {
                 case '': 
                   return <div className='train-block-start'>

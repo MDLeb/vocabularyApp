@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Link} from "react-router-dom";
 import './navbar.css';
 import { WordsContext } from '../../../App';
@@ -14,14 +14,16 @@ const Navbar = ({level}) => {
         });
         event.target.parentNode.classList.add('active');
     }
-    let currentUrl = window.location.href;
+    let [currentUrl, setCurrentUrl] = useState(window.location.href);
+    
+    window.addEventListener('popstate', () => {setCurrentUrl(window.location.href)});
 
-    let burgerToogle = (e) => {
-        e.target.nodeName == 'DIV' ?
-            e.target.classList.toggle('active') : 
-            e.target.closest('DIV').classList.toggle('active');
-        document.querySelector('.navbar__links').classList.toggle('active');
-    }
+    // let burgerToogle = (e) => {
+    //     e.target.nodeName == 'DIV' ?
+    //         e.target.classList.toggle('active') : 
+    //         e.target.closest('DIV').classList.toggle('active');
+    //     document.querySelector('.navbar__links').classList.toggle('active');
+    // }
 
 
     return (
@@ -30,13 +32,7 @@ const Navbar = ({level}) => {
             <div className="navbar">
                 <div className='navbar__level'>Level: {level}</div>
                 <div className='navbar__score'>Score: {score}</div>
-                {/* <div className='navbar__burger_btn' onClick={(e) => {
-                       burgerToogle(e); 
-                }}>
-                    <i></i>
-                    <i></i>
-                    <i></i>
-                </div> */}
+               
                 <ul className="navbar__links">
                     <li className={currentUrl.includes('library') || 
                         (!currentUrl.includes('library') && !currentUrl.includes('train') && !currentUrl.includes('learn')) ?

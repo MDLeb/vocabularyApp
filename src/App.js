@@ -41,6 +41,7 @@ function App() {
                     <Navbar level={level}/> 
                     <Routes>
                         <Route exact path='/' element={<Library />} />
+                        <Route exact path='/vocabularyApp' element={<Library />} />
                         <Route exact path='/library' element={<Library />} />
                         <Route exact path='/train' element={<Train module={''}/>} />
                         <Route exact path='/train/check' element={<Train module={'check'}/>} />

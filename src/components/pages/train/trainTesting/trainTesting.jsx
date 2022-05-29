@@ -52,7 +52,7 @@ function TrainTesting({train}) {
                 }
               })() :
 
-              <div>There are not enough words in your vocabulary for test. Add more than 5 words. </div>
+              <div className='alert'>There are not enough words in your vocabulary for test. Add more than 5 words. </div>
 
             }
         </div>
