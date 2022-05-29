@@ -9,16 +9,16 @@ const WritingComp = ({testArr}) => {
   const [currentScore, setCurrentScore] = useState(0);
 
   let [currentWord, setCurrentWord] = useState({
-    value:testArr[n].value,
-    translation:testArr[n].translation,
+    value:testArr[n]?.value,
+    translation:testArr[n]?.translation,
   });
 
   const nextWord = () => {
-    if(n == testArr.length-1) return;
-    setN(n = n+1);
+    setN(++n);
+    if(n > testArr.length-1) return;
     setCurrentWord({
-      value:testArr[n].value,
-      translation:testArr[n].translation,
+      value:testArr[n]?.value,
+      translation:testArr[n]?.translation,
     });
   }
   
@@ -45,7 +45,7 @@ const WritingComp = ({testArr}) => {
     <WordsContext.Consumer>
       {([[wordsArray, setWordsArray], [score, setScore]]) => (
           
-          (n + 1) == testArr.length ?
+          n > testArr.length - 1 ?
           <div className='test-modal last'>
               {currentScore > 5 ? <p className='test-modal-final-score'>Well done. Your score is {currentScore} points!</p> : <p className='test-modal-final-score'>Your score is {currentScore}.</p>}
               <Link to="/train">

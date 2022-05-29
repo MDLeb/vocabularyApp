@@ -18,13 +18,6 @@ const Navbar = ({level}) => {
     
     window.addEventListener('popstate', () => {setCurrentUrl(window.location.href)});
 
-    // let burgerToogle = (e) => {
-    //     e.target.nodeName == 'DIV' ?
-    //         e.target.classList.toggle('active') : 
-    //         e.target.closest('DIV').classList.toggle('active');
-    //     document.querySelector('.navbar__links').classList.toggle('active');
-    // }
-
 
     return (
         <WordsContext.Consumer>
