@@ -11,13 +11,13 @@ function Train({module}) {
   let trains = [
     {
       name:'check',
-      img:'../../../source/check-mode.svg',
+      img:'./img/check-mode-bg.png',
       availiable: true,
       level: 'easy',
     },
     {
       name: 'write',
-      img:'../../../source/write-mode.svg',
+      img:'./img/write-mode-bg.png',
       availiable: false,
       level: 'hard',
     },
@@ -35,26 +35,7 @@ function Train({module}) {
       {([[wordsArray, setWordsArray], [score, setScore]]) => (
         <div className='train-block'>
             {
-              // module !='' ? 
-              // module == 'check' ?
-              // module == 'check-module' ?
-              // <TrainTesting train={trains[2]}/> : 
-              // <TrainTesting train={trains[0]}/> : 
-              // <TrainTesting train={trains[1]}/> : 
-              // <div className='train-block-start'>
-              //   {
-              //     trains.map(elem => 
-              //         <Link to={`/train/${elem.name}`} key={trains.indexOf(elem)} className='train-item'>
-              //             <div>
-              //               <h2>{elem.name} words<br/>Mode</h2>
-              //               <p>{elem.level} mode</p>
-              //             </div>
-              //             <img src={elem.img} alt="#"  />
-              //         </Link>)
-              //   }
-              // </div> 
-
-             (() => {switch (module) {
+                (() => {switch (module) {
                 case '': 
                   return <div className='train-block-start'>
                        {

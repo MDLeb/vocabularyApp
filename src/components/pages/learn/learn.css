@@ -63,6 +63,8 @@
 }
 .learn-modal-btn.arrow {
     font-size: 40px;
+    background: url('../../../../public/source/arrow.png') center/35% auto no-repeat,
+    #0C9267;
 }
 .learn-modal-btn:hover {
     box-shadow: 0 5px 6px 1px #666;

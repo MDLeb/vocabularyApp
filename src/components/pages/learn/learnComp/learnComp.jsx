@@ -28,7 +28,7 @@ const LearnComp = ({arr}) => {
         <p className='learn-modal-translation-value'>{currentWord.translation}</p>
         {n == arr.length - 1 ? 
         <button className='learn-modal-btn' onClick={nextWord}>Learn again</button> :
-        <button className='learn-modal-btn arrow' onClick={nextWord}>&#129106;</button>}
+        <button className='learn-modal-btn arrow' onClick={nextWord}></button>}
     </div>
   );
 }
