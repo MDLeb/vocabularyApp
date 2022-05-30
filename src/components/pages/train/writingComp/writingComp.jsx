@@ -35,9 +35,11 @@ const WritingComp = ({testArr}) => {
       e.type == 'keydown' ? e.target.value = null : e.target.parentNode.querySelector('.test-modal-input').value = null;
       nextWord();
       setCurrentScore(currentScore+1);
+      return true;
     }  
     else {
       currentScore > 0 ? setCurrentScore(currentScore-1) : setCurrentScore(0);
+      return false;
     }
   }
 
@@ -61,8 +63,29 @@ const WritingComp = ({testArr}) => {
               <p className='test-modal-word'>{currentWord.translation}</p>
               <p className='test-modal-description'>Write translation for this word</p>
               <div>
-                <input className='test-modal-input' autoFocus={true} type="text" onKeyDown={(e)=>{if(e.code == 'Enter' || e.code == 'NumpadEnter') checkWord(e)}}/>
-                <button className='test-modal-send' onClick={((e)=>{checkWord(e)})}>enter</button>
+                <input className='test-modal-input' autoFocus={true} type="text" onKeyDown={(e)=>{
+                  if(e.code == 'Enter' || e.code == 'NumpadEnter') {
+                    let a = checkWord(e);
+                    if(a) {
+                        wordsArray.find(elem => elem.value == currentWord.value).learnLevel < 90 ?
+                        wordsArray.find(elem => elem.value == currentWord.value).learnLevel += 10 : wordsArray.find(elem => elem.value == currentWord.value).learnLevel = 100; 
+                        window.localStorage.setItem(`words`, '');
+                        window.localStorage.setItem(`words`, JSON.stringify(wordsArray));
+                    }
+                  }
+                }}/>
+                <button className='test-modal-send' onClick={
+                  ((e)=>{
+                    let a = checkWord(e);
+                    if(a) {
+                        wordsArray.find(elem => elem.value == currentWord.value).learnLevel < 90 ?
+                        wordsArray.find(elem => elem.value == currentWord.value).learnLevel += 10 :
+                        wordsArray.find(elem => elem.value == currentWord.value).learnLevel = 100; 
+                        window.localStorage.setItem(`words`, '');
+                        window.localStorage.setItem(`words`, JSON.stringify(wordsArray));
+                    }
+                  })
+                }>enter</button>
               </div>
           </div>
         

@@ -155,10 +155,13 @@
     width: 20px;
     height: 20px;
     cursor: pointer;
+}
+.save-changes-btn.change {
     background: url('../../../../public/source/pencil_ico.png') center/90% auto no-repeat;
 }
-.save-changes-btn.active {
-    background-image: url('../../../../public/source/save_ico.png');
+.save-changes-btn.save {
+    background: url('../../../../public/source/save_ico.png') center/90% auto no-repeat;
+
 }
 .save-changes-btn:focus {
     outline: 1px dotted #ccc;

@@ -96,12 +96,14 @@
    height: 80px;
    width: 25%;
    font-size: 36px;
-   text-transform: capitalize;
    color: #516961;
    border: none;
    background-color: #FFFFFF;
    box-shadow: 0 10px 10px 2px #ccc;
    cursor: pointer;
+}
+.test-modal-btn::first-letter {
+    text-transform: uppercase;
 }
 .test-modal-btn:hover {
     box-shadow: 0 5px 5px 2px #ccc;    

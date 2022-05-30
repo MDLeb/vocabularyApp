@@ -29,7 +29,6 @@
 }
 .learn-modal-word {
     text-align: center;
-    text-transform: capitalize;
     font-weight: 700;
     font-size: 72px;
 }
@@ -41,7 +40,10 @@
 .learn-modal-translation-value {
     color: #0C9267;
     font-size: 48px;
-    text-transform: capitalize;
+}
+.learn-modal-word::first-letter,
+.learn-modal-translation-value::first-letter {
+    text-transform: uppercase;
 }
 .learn-modal-btn {
     height: 50px;

@@ -10,16 +10,7 @@ const WordItem = ({id}) => {
       let inputValue = translation.current;
       setWordsArray(wordsArray.map(elem => elem.id == id ? {...elem, translation:inputValue.value} : elem));
     }
-    setChangeBtn('save') ? setChangeBtn('change') : setChangeBtn('save');
-    toggleBtn();
-  }
-  const toggleBtn = () => {
-    let changeBtnElem = document.querySelector('.save-changes-btn');
-    
-    changeBtn == 'save' ?
-      changeBtnElem.classList.add('active') :
-      changeBtnElem.classList.remove('active');
-    
+    changeBtn == 'save' ? setChangeBtn('change') : setChangeBtn('save');
   }
 
   let translation = useRef('');
@@ -34,13 +25,13 @@ const WordItem = ({id}) => {
               <input type="text" autoFocus={true} ref={translation} onBlur={(e) => {
                 if(e.relatedTarget.classList.contains('save-changes-btn')) return;
                   setChangeBtn('change');
-                  toggleBtn();
               }}/> :
               <span className='word-item-translation'>
                 {wordsArray.find(elem => elem.id == id).translation}
               </span>}
-              <button className='save-changes-btn' onClick={(e) => {
-                saveChanges(setWordsArray, wordsArray);
+              <button className={changeBtn == 'save' ? 'save-changes-btn save' : 'save-changes-btn change'} 
+                onClick={(e) => {
+                  saveChanges(setWordsArray, wordsArray);
               }}></button>
           </li>
           <li>{wordsArray.find(elem => elem.id == id).learnLevel}%</li> 
