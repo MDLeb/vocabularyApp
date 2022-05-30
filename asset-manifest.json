@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/vocabularyApp/static/css/main.c0fdf6e1.css",
-    "main.js": "/vocabularyApp/static/js/main.2e7e1c65.js",
+    "main.css": "/vocabularyApp/static/css/main.9aa31630.css",
+    "main.js": "/vocabularyApp/static/js/main.849aad69.js",
     "static/media/check-mode-bg.png": "/vocabularyApp/static/media/check-mode-bg.59917188e30cb219be87.png",
     "static/media/write-mode-bg.png": "/vocabularyApp/static/media/write-mode-bg.25a45975be7bf5146c6d.png",
     "static/media/pencil_ico.png": "/vocabularyApp/static/media/pencil_ico.1f9baa565f842f77892c.png",
     "static/media/save_ico.png": "/vocabularyApp/static/media/save_ico.e9d63e7c27687d4a36db.png",
     "index.html": "/vocabularyApp/index.html",
-    "main.c0fdf6e1.css.map": "/vocabularyApp/static/css/main.c0fdf6e1.css.map",
-    "main.2e7e1c65.js.map": "/vocabularyApp/static/js/main.2e7e1c65.js.map"
+    "main.9aa31630.css.map": "/vocabularyApp/static/css/main.9aa31630.css.map",
+    "main.849aad69.js.map": "/vocabularyApp/static/js/main.849aad69.js.map"
   },
   "entrypoints": [
-    "static/css/main.c0fdf6e1.css",
-    "static/js/main.2e7e1c65.js"
+    "static/css/main.9aa31630.css",
+    "static/js/main.849aad69.js"
   ]
 }
