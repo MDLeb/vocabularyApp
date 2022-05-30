@@ -1,43 +1,14 @@
 .navbar {
-    width: 300px;
+    max-width: 200px;
+    min-width: 200px;
     min-height: 100%;
-    padding-top: 15%;
+    padding-top: 10%;
     margin-right: 40px;
-    background: url('../../../../public/source/nav_bg_img.png') top 20px left 20px/25% auto no-repeat;
+    background: url('../../../../public/source/nav_bg_img.png') top 10px left 10px/25% auto no-repeat;
     background-color: #20B887;
     position: relative;
 }
-.navbar__burger_btn {
-    display: none;
-    align-items: center;
-    height: 50px;
-    width: 50px;
-    padding: 10px 0;
-    flex-direction: column;
-    justify-content: space-around;
-}
-.navbar__burger_btn i{
-    display: block;
-    border-radius: 2px;
-    width: 30px;
-    height: 3px;
-    background-color: #abddcd;
-}
-.navbar__burger_btn.active i{
-    background-color: white;
-}
-.navbar__burger_btn.active {
-    justify-content: center;
-}
-.navbar__burger_btn.active i:nth-child(1) {
-    transform: translateY(1.5px) rotate(45deg);
-}
-.navbar__burger_btn.active i:nth-child(2) {
-    display: none;
-}
-.navbar__burger_btn.active i:nth-child(3) {
-    transform: translateY(-1.5px) rotate(-45deg);
-}
+
 .navbar__links {
     height: 100%;
     width: 90%;
@@ -103,19 +74,20 @@
 }
 @media (max-width: 1024px) {
     .navbar {
-        background-position: top 80px center;
     }
     .navbar__level {
         width: 100%;
         text-align: center;
         top: 20px;
-        left: 0;
+        left: 30px;
         margin-top: -3px;
     }
 }
 @media (max-width: 768px) {
     .navbar {
         width: 100%;
+        max-width: none;
+        min-width: none;
         height: 150px;     
         background-size: 10% auto;
         background-position: left 10px top 10px;
