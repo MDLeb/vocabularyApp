@@ -37,7 +37,7 @@ const WordItem = ({id}) => {
           <li>{wordsArray.find(elem => elem.id == id).learnLevel}%</li> 
           <li className='word-remove' onClick={()=> {
                 (setWordsArray(wordsArray.filter(elem => elem.id !== id)));
-              }}>Delete<span className='remove-icon'></span>
+              }}>Delete
           </li>
         </ul>
       )}

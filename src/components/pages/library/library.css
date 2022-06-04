@@ -129,17 +129,18 @@
     position: absolute;
     cursor: pointer;
     right: 0;
-    background-color: #F3F3F3;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #992E00;
     z-index: 1;
+    padding-right: 30px;
     transition: right 1s ease;
+    background: url('../../../../public/source/remove_ico.png') right 10px center/25% auto no-repeat,
+                #F3F3F3;
+
 }
-.word-list ul li.word-remove span.icon {
-    font-size: 25px;
-}
+
 .word-list ul:hover li.word-remove,
 .word-list ul:hover li.word-remove:hover {
     right: -100px;
@@ -191,21 +192,22 @@
         color: transparent;
         background-color: transparent;
         padding: 0 20px 0 0;
+        background-size: 40%;
     }
     .word-item:hover li.word-remove {
         z-index: 4;
         right: 0px !important;
     }
-    .word-item li.word-remove>.icon {
-        color: #992E00;
-    }
+    
 }
 @media (max-width: 426px) {
     .library {
         margin: 0;
         margin-top: 10px;
     }
-
+    .word-item li.word-remove {
+        background-size: 60%;
+    }
     .add-new-word input,
     .word-list-header,
     .word-item li  {
